@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Bot</title>
+    <link rel="stylesheet" href="static/hello.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AI Bot</h1>
+        {% if conversation %}
+	    {% for item in conversation %}
+	        {% if item['role'] == "user" %}
+		    {% set role = "You" %}
+                {% endif %}
+
+                {% if item['role'] == "assistant" %}
+                    {% set role = "AI Bot" %}
+                {% endif %}
+		    
+		<p><b>{{ role }}</b>  {{": {}".format(item['content']) }}</p>
+            {% endfor %}
+        {% endif %}
+
+
+        <form action="/ask" method="post">
+            <input type="text" id="query" name="query" placeholder="Message AI Bot" required> <button type="submit">Send</button>
+        </form>
+    </div>
+</body>
+</html>
+
